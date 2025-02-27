@@ -5,10 +5,115 @@
     <link rel="icon" type="image/svg+xml" href="./logo.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">-->
-    <title>Toast</title>
-  <script type="module" crossorigin src="./assets/index-CER39JiS.js"></script>
+    <title>Galaxy Raiders</title>
+<style>
+    :root {
+        --button-offset-x: 32px;
+        --button-offset-y: 16px;
+    }
+
+    #game-container {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
+
+    .game-button {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        font-size: 20px;
+        text-align: center;
+        line-height: 50px;
+        border: none;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    #button-a {
+        bottom: calc(20px + var(--button-offset-y));
+        right: calc(56px + var(--button-offset-x));
+        background-color: #124c12;
+        color: #208720;
+    }
+
+    #button-a:active {
+        background-color: #0a2e0a;
+    }
+
+    #button-b {
+        bottom: calc(60px + var(--button-offset-y));
+        right: calc(16px + var(--button-offset-x));
+        background-color: #5e1b1b;
+        color: #ac2626;
+    }
+
+    #button-b:active {
+        background-color: #3a0f0f;
+    }
+
+    #button-x {
+        bottom: calc(60px + var(--button-offset-y));
+        right: calc(96px + var(--button-offset-x));
+        background-color: #17176c;
+        color: #2626ac;
+    }
+
+    #button-x:active {
+        background-color: #0f0f3a;
+    }
+
+    #button-y {
+        bottom: calc(100px + var(--button-offset-y));
+        right: calc(56px + var(--button-offset-x));
+        background-color: #656520;
+        color: #acac26;
+    }
+
+    #button-y:active {
+        background-color: #3a3a0f;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #112233;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    #app {
+        /* Add any additional styles for the app div here */
+    }
+</style>
+  <script type="module" crossorigin src="./assets/index-DtRYQYWq.js"></script>
 </head>
-<body style="margin:0;padding:0;background-color: #112233;overflow: hidden; ">
+<body style="margin:0;padding:0;background-color: #112233;overflow: hidden;">
 <div id="app"></div>
+<div id="game-container" class="hidden">
+    <div id="joystick-container"></div>
+    <button id="button-a" class="game-button">A</button>
+    <button id="button-b" class="game-button">B</button>
+    <button id="button-x" class="game-button">X</button>
+    <button id="button-y" class="game-button">Y</button>
+</div>
+<script>
+    function isMobileDevice() {
+        return /Mobi|Android/i.test(navigator.userAgent);
+    }
+
+    if (isMobileDevice()) {
+        document.getElementById('game-container').classList.remove('hidden');
+    }
+</script>
 </body>
 </html>
