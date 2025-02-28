@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eyeball Test</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #eee;
+            margin: 0;
+        }
+
+        .eye-container {
+            display: flex;
+            gap: 40px;
+        }
+
+        .eye {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .pupil {
+            width: 30px;
+            height: 30px;
+            background: black;
+            border-radius: 50%;
+            position: absolute;
+            transition: transform 0.05s linear;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="eye-container">
+        <div class="eye">
+            <div class="pupil"></div>
+        </div>
+        <div class="eye">
+            <div class="pupil"></div>
+        </div>
+    </div>
+
+    <script>
+        const eyes = document.querySelectorAll('.eye');
+        const pupils = document.querySelectorAll('.pupil');
+
+        document.addEventListener('mousemove', (event) => {
+            const { clientX, clientY } = event;
+
+            eyes.forEach((eye, index) => {
+                const rect = eye.getBoundingClientRect();
+                const eyeCenterX = rect.left + rect.width / 2;
+                const eyeCenterY = rect.top + rect.height / 2;
+
+                const deltaX = clientX - eyeCenterX;
+                const deltaY = clientY - eyeCenterY;
+
+                const angle = Math.atan2(deltaY, deltaX);
+                const distance = Math.min(rect.width / 4, Math.sqrt(deltaX**2 + deltaY**2) / 5);
+
+                pupils[index].style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px)`;
+            });
+        });
+    </script>
+
+</body>
+</html>
